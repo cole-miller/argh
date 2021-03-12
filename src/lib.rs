@@ -244,7 +244,7 @@ pub fn from_env<T: TopLevelCommand>() -> T {
     let cmd = cmd(&strings[0], &strings[0]);
     let strs: Vec<&str> = strings.iter().map(|s| s.as_str()).collect();
     T::from_args(&[cmd], &strs[1..]).unwrap_or_else(|early_exit| {
-        println!("{}", early_exit.output);
+        eprintln!("{}", early_exit.output);
         std::process::exit(match early_exit.status {
             Ok(()) => 0,
             Err(()) => 1,
@@ -264,7 +264,7 @@ pub fn cargo_from_env<T: TopLevelCommand>() -> T {
     let cmd = cmd(&strings[1], &strings[1]);
     let strs: Vec<&str> = strings.iter().map(|s| s.as_str()).collect();
     T::from_args(&[cmd], &strs[2..]).unwrap_or_else(|early_exit| {
-        println!("{}", early_exit.output);
+        eprintln!("{}", early_exit.output);
         std::process::exit(match early_exit.status {
             Ok(()) => 0,
             Err(()) => 1,
